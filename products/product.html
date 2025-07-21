@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopEase - Products</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">ShopEase</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="/index.html">Home</a>
+      <a href="product.html">Products</a>
+      <a href="/cart.html">Cart</a>
+      <a href="/accounts/account.html" class="nav-user-icon">
+        <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+  </header>
+
+  <div class="products-container">
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="../products/mobiles/mobiles.html">Mobiles</a></li>
+        <li><a href="/products/laptops/laptops.html">Laptops</a></li>
+        <li><a href="/products/headphones/headphones.html">Headphones</a></li>
+        <li><a href="/products/fashion/fashion.html">Fashion</a></li>
+        <li><a href="/products/homeappliances/homeappliances.html">Home Appliances</a></li>
+      </ul>
+    </aside>
+
+    <main class="product-grid">
+      <div class="product-card"
+      data-id="pm101" 
+  data-name="iPhone 14 Pro" 
+  data-price="117999" 
+  data-image="/assets/mobiles/ip14pro.webp">
+        <div class="wishlist-icon">
+          <i class="far fa-heart"></i>
+        </div>
+        <img src="../assets/ip14pro.webp" alt="Product" />
+        <h3>iPhone 14 Pro</h3>
+        <p>₹1,29,999</p>
+        <button class="add-to-cart" 
+  data-id="pm101" 
+  data-name="iPhone 14 Pro" 
+  data-price="117999" 
+  data-image="/assets/mobiles/ip14pro.webp">
+  Add to Cart
+</button>
+
+      </div>
+      <div class="product-card"
+      data-id="pm102" 
+  data-name="Samsung Galaxy S23" 
+  data-price="89999" 
+  data-image="/assets/mobiles/sams23.webp">
+        <div class="wishlist-icon">
+          <i class="far fa-heart"></i>
+        </div>
+        <img src="../assets/sams23.webp" alt="Product" />
+        <h3>Samsung Galaxy S23</h3>
+        <p>₹89,999</p>
+        <button class="add-to-cart" 
+  data-id="pm102" 
+  data-name="Samsung Galaxy S23" 
+  data-price="89999" 
+  data-image="/assets/mobiles/sams23.webp">
+  Add to Cart
+</button>
+      </div>
+      <div class="product-card"
+      data-id="pm103" 
+        data-name="OnePlus 12R" 
+        data-price="44999" 
+        data-image="/assets/mobiles/one+12R.webp">
+        <div class="wishlist-icon">
+          <i class="far fa-heart"></i>
+        </div>
+        <img src="../assets/one+12R.webp" alt="Product" />
+        <h3>OnePlus 12R</h3>
+        <p>₹44,999</p>
+        <button class="add-to-cart" 
+        data-id="pm103" 
+        data-name="OnePlus 12R" 
+        data-price="44999" 
+        data-image="/assets/mobiles/one+12R.webp">
+        Add to Cart
+      </button>
+      </div>
+      <div class="product-card"
+      data-id="pl101" 
+        data-name="Dell Inspiron 15" 
+        data-price="55000" 
+        data-image="/assets/dellins15.avif">
+        <div class="wishlist-icon">
+          <i class="far fa-heart"></i>
+        </div>
+        <img src="../assets/dellins15.avif" alt="Product" />
+        <h3>Dell Inspiron 15</h3>
+        <p>₹55,000</p>
+        <button class="add-to-cart" 
+        data-id="pl101" 
+        data-name="Dell Inspiron 15" 
+        data-price="55000" 
+        data-image="assets/dellins15.avif">
+        Add to Cart
+      </button>
+      </div>
+      <div class="product-card"
+      data-id="ph101" 
+        data-name="Boat Rockerz" 
+        data-price="1299" 
+        data-image="/assets/boatrockerz.webp">
+        <div class="wishlist-icon">
+          <i class="far fa-heart"></i>
+        </div>
+        <img src="../assets/boatrockerz.webp" alt="Product" />
+        <h3>Boat Rockerz</h3>
+        <p>₹1,299</p>
+        <button class="add-to-cart" 
+        data-id="ph101" 
+        data-name="Boat Rockerz" 
+        data-price="1299" 
+        data-image="/assets/boatrockerz.webp">
+        Add to Cart
+      </button>
+        
+      </div>
+      <div class="product-card" 
+      data-id="pha101" 
+        data-name="LG Smart TV 43" 
+        data-price="34999" 
+        data-image="/assets/lgsmarttv.avif">
+      <div class="wishlist-icon">
+        <i class="far fa-heart"></i>
+      </div>
+        <img src="../assets/lgsmarttv.avif" alt="Product" />
+        <h3>LG Smart TV 43</h3>
+        <p>₹34,999</p>
+        <button class="add-to-cart" 
+        data-id="pha101" 
+        data-name="LG Smart TV 43" 
+        data-price="34999" 
+        data-image="/assets/lgsmarttv.avif">
+        Add to Cart
+      </button>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 ShopEase. All rights reserved.</p>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+  <script src="/js/cart.js"></script>
+  <script src="/js/wishlist.js"></script>
+
+</body>
+</html>

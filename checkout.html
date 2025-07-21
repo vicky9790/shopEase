@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | ShopEase</title>
+  <link rel="stylesheet" href="/css/checkot.css" />
+</head>
+<body>
+
+  <div class="checkout-container">
+    <h2>🛒 Checkout</h2>
+
+    <div class="checkout-flex">
+
+      
+      <!-- Left: Shipping Form -->
+      <div id="checkout-section">
+        <form id="checkout-form">
+          <input type="text" id="full-name" placeholder="Full Name" />
+          <input type="text" id="address1" placeholder="Address Line 1" />
+          <input type="text" id="city" placeholder="City" />
+          <input type="text" id="state" placeholder="State" />
+          <input type="text" id="zip" placeholder="ZIP Code" />
+          <input type="text" id="phone" placeholder="Phone Number" />
+          <select id="payment-method">
+            <option value="">Select Payment Method</option>
+            <option value="card">Credit / Debit Card</option>
+            <option value="cod">Cash on Delivery</option>
+          </select>
+        </form>
+      </div>
+      
+
+      <div id="order-summary-section" class="order-summary">
+        <!-- JS will insert product list and Place Order button -->
+      </div>
+      
+        
+        <!-- Success Message Box -->
+        <div id="success-message" style="display: none;">
+          <div class="checkmark">✔</div>
+          <h2>Order Placed!</h2>
+          <p>Thank you for choosing ShopEase</p>
+        </div>
+        
+        
+
+      <div  id="order-summary-section" class="order-summary"></div>
+        <script>
+          const cartData = JSON.parse(localStorage.getItem("checkoutCart")) || [];
+          const summaryBox = document.getElementById("order-summary-section");
+        
+          if (cartData.length === 0) {
+            summaryBox.innerHTML = "<p>No items in order summary.</p>";
+          } else {
+            let total = 0;
+            let itemsHTML = "";
+        
+            cartData.forEach(item => {
+              const qty = item.quantity || 1;
+              const itemTotal = item.price * qty;
+              total += itemTotal;
+        
+              itemsHTML += `
+                <div class="order-item">
+                  <p>${item.name} (x${qty})</p>
+                  <span>₹${itemTotal.toLocaleString()}</span>
+                </div>
+              `;
+            });
+        
+            summaryBox.innerHTML = `
+              <h3>Order Summary</h3>
+              ${itemsHTML}
+              <hr/>
+              <div class="order-total">
+                <strong>Total:</strong> ₹${total.toLocaleString()}
+              </div>
+              <button type="button" class="place-order-btn">Place Order</button>
+            `;
+        
+            // Attach click listener AFTER button is added
+            document.querySelector(".place-order-btn").addEventListener("click", () => {
+              let isValid = true;
+        
+              const requiredFields = [
+                "full-name", "address1", "city", "state", "zip", "phone", "payment-method"
+              ];
+        
+              requiredFields.forEach(id => {
+                const field = document.getElementById(id);
+                field.classList.remove("error");
+        
+                if (!field.value.trim()) {
+                  field.classList.add("error");
+                  isValid = false;
+                }
+              });
+        
+              if (isValid) {
+                const checkoutSection = document.getElementById("checkout-section");
+const summarySection = document.getElementById("order-summary-section");
+const successMessage = document.getElementById("success-message");
+
+if (checkoutSection && summarySection && successMessage) {
+  checkoutSection.style.display = "none";
+  summarySection.style.display = "none";
+  successMessage.style.display = "block";
+} else {
+  console.error("❌ One or more required sections are missing in the HTML");
+}
+
+                document.getElementById("checkout-section").style.display = "none";
+                document.getElementById("order-summary-section").style.display = "none";
+                document.getElementById("success-message").style.display = "block";
+                console.log("✅ Form is valid. Showing confirmation...");
+
+              }
+            });
+          }
+
+          // Save cart items as order history
+const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+if (cartItems.length > 0) {
+  let orderHistory = JSON.parse(localStorage.getItem("orderHistory")) || [];
+
+  // Push new order with timestamp
+  orderHistory.push({
+    id: Date.now(), // unique order ID
+    items: cartItems,
+    timestamp: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
+
+  // Optional: Clear cart after order
+  localStorage.removeItem("cart");
+}
+
+        </script>
+</body>
+</html>
