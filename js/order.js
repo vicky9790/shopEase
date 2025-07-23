@@ -27,7 +27,8 @@ if (orderHistory.length === 0) {
       <div class="order-items">
         ${order.items.map(item => `
           <div class="order-item">
-           <img src="${item.image.startsWith('/') ? item.image : '/' + item.image}" alt="${item.name}" />
+           <img src="${item.image}" alt="${item.name}" />
+
 
             <div>
               <h4>${item.name}</h4>

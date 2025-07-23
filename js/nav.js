@@ -1,6 +1,7 @@
-document.getElementById("menu-toggle").addEventListener("click", function () {
-  document.getElementById("nav-links").classList.toggle("show");
-});
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("menu-toggle")?.addEventListener("click", function () {
+    document.getElementById("nav-links")?.classList.toggle("show");
+  });
 
   const slides = document.querySelectorAll(".banner");
   const dots = document.querySelectorAll(".dot");
@@ -27,75 +28,69 @@ document.getElementById("menu-toggle").addEventListener("click", function () {
     clearInterval(autoSlideInterval);
     autoSlideInterval = setInterval(autoSlide, 4000);
   }
-  resetAutoSlide();
+
+  if (slides.length) resetAutoSlide();
 
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => showSlide(i));
   });
 
-  // Touch / swipe support
+  // Swipe handling
   let startX = 0;
-  slider.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
+  if (slider) {
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
 
-  slider.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    handleSwipe(endX - startX);
-  });
+    slider.addEventListener("touchend", e => {
+      const endX = e.changedTouches[0].clientX;
+      handleSwipe(endX - startX);
+    });
 
-  slider.addEventListener("mousedown", e => {
-    startX = e.clientX;
-  });
+    slider.addEventListener("mousedown", e => {
+      startX = e.clientX;
+    });
 
-  slider.addEventListener("mouseup", e => {
-    handleSwipe(e.clientX - startX);
-  });
+    slider.addEventListener("mouseup", e => {
+      handleSwipe(e.clientX - startX);
+    });
+  }
 
   function handleSwipe(distance) {
     if (Math.abs(distance) < 30) return;
     if (distance > 0) {
-      // swipe right
       const prev = (current - 1 + slides.length) % slides.length;
       showSlide(prev);
     } else {
-      // swipe left
       const next = (current + 1) % slides.length;
       showSlide(next);
     }
   }
 
-  function scrollCarousel(direction) {
+  // Carousel scrolling functions
+  window.scrollCarousel = function (direction) {
     const container = document.getElementById("product-carousel");
-    const scrollAmount = 300; // adjust as needed
-
-    if (direction === "left") {
-      container.scrollLeft -= scrollAmount;
-    } else {
-      container.scrollLeft += scrollAmount;
+    const scrollAmount = 300;
+    if (container) {
+      container.scrollLeft += direction === "left" ? -scrollAmount : scrollAmount;
     }
-  }
+  };
 
-  function scrollDeals(direction) {
+  window.scrollDeals = function (direction) {
     const container = document.getElementById("deals-carousel");
     const scrollAmount = 300;
-
-    if (direction === "left") {
-      container.scrollLeft -= scrollAmount;
-    } else {
-      container.scrollLeft += scrollAmount;
+    if (container) {
+      container.scrollLeft += direction === "left" ? -scrollAmount : scrollAmount;
     }
-  }
+  };
 
-  function scrollFlash(direction) {
+  window.scrollFlash = function (direction) {
     const container = document.getElementById("flash-carousel");
     const scrollAmount = 300;
-    if (direction === "left") {
-      container.scrollLeft -= scrollAmount;
-    } else {
-      container.scrollLeft += scrollAmount;
+    if (container) {
+      container.scrollLeft += direction === "left" ? -scrollAmount : scrollAmount;
     }
-  }
+  };
 
   // Countdown timer
   function startFlashTimer(hours = 24) {
@@ -112,7 +107,7 @@ document.getElementById("menu-toggle").addEventListener("click", function () {
         return;
       }
 
-      const h = String(Math.floor((distance / (1000 * 60 * 60)))).padStart(2, "0");
+      const h = String(Math.floor(distance / (1000 * 60 * 60))).padStart(2, "0");
       const m = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
       const s = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, "0");
 
@@ -123,18 +118,19 @@ document.getElementById("menu-toggle").addEventListener("click", function () {
     const timerInterval = setInterval(updateTimer, 1000);
   }
 
-  startFlashTimer(); // Start a 4-hour timer
+  startFlashTimer();
 
   const carousel = document.getElementById("testimonial-carousel");
+  if (carousel) {
+    setInterval(() => {
+      carousel.scrollLeft += 280;
+      if (carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth) {
+        carousel.scrollLeft = 0;
+      }
+    }, 4000);
+  }
 
-  setInterval(() => {
-    carousel.scrollLeft += 280;
-    if (carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth) {
-      carousel.scrollLeft = 0;
-    }
-  }, 4000);
-
-  function submitNewsletter(e) {
+  window.submitNewsletter = function (e) {
     e.preventDefault();
     const email = document.getElementById("newsletterEmail").value;
     const msg = document.getElementById("newsletter-msg");
@@ -145,19 +141,21 @@ document.getElementById("menu-toggle").addEventListener("click", function () {
     } else {
       msg.textContent = "❌ Please enter a valid email.";
     }
-  }
+  };
 
-  document.querySelector(".place-order-btn").addEventListener("click", () => {
-    alert("✅ Your order has been placed successfully!");
-  });
+  const placeBtn = document.querySelector(".place-order-btn");
+  if (placeBtn) {
+    placeBtn.addEventListener("click", () => {
+      alert("✅ Your order has been placed successfully!");
+    });
+  }
 
   document.querySelectorAll(".wishlist-icon").forEach(icon => {
     icon.addEventListener("click", function () {
       this.classList.toggle("active");
-
       const productId = this.getAttribute("data-id");
-
-      // OPTIONAL: Add logic to store/remove in localStorage or wishlist
-      // Example: addToWishlist(productId);
     });
   });
+});
+
+
